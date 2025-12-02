@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+:root {
+  --radius-xl: 22px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+}
+body {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+}
+body {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body:not([data-theme="dark"]) {
+  background: radial-gradient(1200px 600px at 15% 10%, #daf2ea, transparent),
+    radial-gradient(1000px 600px at 90% 20%, #eadcff, transparent),
+    linear-gradient(135deg, #dff4ef, #e9d9ff);
+  color: #0f172a;
+}
+
+body[data-theme="dark"] {
+  background: radial-gradient(
+      1200px 600px at 15% 10%,
+      rgba(15, 23, 42, 0.8),
+      transparent
+    ),
+    radial-gradient(1000px 600px at 90% 20%, rgba(30, 27, 46, 0.8), transparent),
+    linear-gradient(135deg, #0f172a, #1e1b2e);
+  color: #f1f5f9;
+}
+
+.app {
+  max-width: 1240px;
+  margin: 28px auto;
+}
+
+/* App Header */
+.app-header {
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.app-header__content {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 12px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+body[data-theme="dark"] .app-header {
+  background: var(--panel);
+  border-bottom-color: var(--line);
+}
+
+/* Header refinements */
+/* .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mark {
+  width: 20px;
+  height: 20px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #6ea8ff, #a5d8ff);
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.35) inset;
+}
+.brand-name {
+  font-weight: 800;
+} */
+
+/* Общие стили для бренда */
+.brand {
+  display: flex;
+  /* background-color: #1d2a6b; */
+  align-items: center;
+  gap: 12px;
+  text-decoration: none; /* Если это ссылка */
+  color: inherit; /* Наследует цвет от родителя */
+}
+
+/* Логотип-значок */
+.mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* СВЕТЛАЯ ТЕМА */
+:root,
+[data-theme="light"] {
+  --mark-bg-primary: #3b82f6;
+  --mark-bg-secondary: #60a5fa;
+  --mark-accent: #f59e0b;
+  --brand-name-color: #1f2937;
+  --mark-shadow: rgba(59, 130, 246, 0.4);
+}
+
+/* ТЕМНАЯ ТЕМА */
+[data-theme="dark"] {
+  --mark-bg-primary: #60a5fa;
+  --mark-bg-secondary: #93c5fd;
+  --mark-accent: #fbbf24;
+  --brand-name-color: #f9fafb;
+  --mark-shadow: rgba(96, 165, 250, 0.5);
+}
+
+/* Применяем переменные */
+.logo-wrapper {
+  height: 56px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.9),
+    rgba(30, 27, 46, 0.9)
+  ); */
+  border-radius: 50%;
+}
+.logo {
+  height: 40px;
+  aspect-ratio: 1;
+}
+
+.brand-name {
+  /* font-weight: 800; */
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.25rem;
+  color: var(--brand-name-color);
+  letter-spacing: -0.025em;
+}
+.colored {
+  color: #1d2a6b;
+}
+
+body[data-theme="light"] .colored {
+  color: #fff;
+}
+
+/* Внутренние элементы логотипа (псевдоэлементы) */
+.mark::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 14px;
+  background: white;
+  border-radius: 2px 4px 4px 2px;
+  /* Создаем эффект "корешка" книги */
+  box-shadow: -2px 0 0 var(--mark-accent);
+}
+
+.mark::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mark-accent);
+  bottom: 4px;
+  right: 4px;
+  /* Создаем эффект маленькой планеты или декоративного элемента */
+}
+
+.calendar[data-theme="light"] .brand-name {
+  color: #1d2a6b;
+}
+
+.calendar[data-theme="dark"] .brand-name {
+  color: #cbd5e1;
+}
