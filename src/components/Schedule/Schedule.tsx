@@ -1,33 +1,60 @@
 import React from "react";
-import "./schedule.css";
+import styles from "./schedule.module.css";
 import { format } from "date-fns";
 import { ruShort } from "../../locales/ru_days_short";
 import { getISODay } from "date-fns";
 import { add, sub } from "date-fns";
 import { CalendarDay } from "../intefaces";
 import Day from "../TableGrid/Day";
-import { useState, useEffect } from "react";
+import {
+  useState,
+  useEffect,
+} from "react";
+//components
 import TableGrid from "../TableGrid/TableGrid";
+import Slot from "../Slot/Slot";
 
 import { useSelector } from "react-redux";
-import { selectTheme, selectDevice } from "../../store/features/device";
+import {
+  selectTheme,
+  selectDevice,
+} from "../../store/features/device";
 
 import { DeviceType } from "../enums";
 
 export default function Schedule() {
   //component settings
-  const theme = useSelector(selectTheme);
-  const device = useSelector(selectDevice);
+  const theme = useSelector(
+    selectTheme
+  );
+  const device = useSelector(
+    selectDevice
+  );
 
   //static data
-  const getFirstWeekDay = (today: Date) => {
-    const daysPassed = getISODay(today) - 1;
-    return daysPassed === 0 ? today : sub(today, { days: daysPassed });
+  const getFirstWeekDay = (
+    today: Date
+  ) => {
+    const daysPassed =
+      getISODay(today) - 1;
+    return daysPassed === 0
+      ? today
+      : sub(today, {
+          days: daysPassed,
+        });
   };
   //typezation
-  const formateDate = (day: Date, scheme: any) => {
-    const { dateFormat, local } = scheme;
-    return format(day, dateFormat, local);
+  const formateDate = (
+    day: Date,
+    scheme: any
+  ) => {
+    const { dateFormat, local } =
+      scheme;
+    return format(
+      day,
+      dateFormat,
+      local
+    );
   };
 
   const today = new Date();
@@ -39,48 +66,68 @@ export default function Schedule() {
     return 7;
   };
 
-  const [daysInSchedule, setDaysInSchedule] = useState(daysToShow());
+  const [
+    daysInSchedule,
+    setDaysInSchedule,
+  ] = useState(daysToShow());
 
   useEffect(() => {
     setDaysInSchedule(daysToShow());
   }, [device]);
 
-  const [firstDayOfWeek, setFirstDayOfWeek] = useState(getFirstWeekDay(today));
+  const [
+    firstDayOfWeek,
+    setFirstDayOfWeek,
+  ] = useState(getFirstWeekDay(today));
 
   const selectedWeek: string[] = [];
-
-  //тут запрос данных
-  /*
-  const getDaysToShow = () => {
-    switch () {
-      case "desktop":
-        return 7;
-      case "mobile":
-        return 1;
-    }
-  };
-  const daysToShow = getDaysToShow();
-*/
 
   const dateFormationScheme = {
     dateFormat: "E, dd MMM",
     local: { locale: ruShort },
   };
 
-  for (let i = 0; i < daysInSchedule; i++) {
-    const day = add(firstDayOfWeek, { days: i });
-    selectedWeek[i] = formateDate(day, dateFormationScheme);
+  for (
+    let i = 0;
+    i < daysInSchedule;
+    i++
+  ) {
+    const day = add(firstDayOfWeek, {
+      days: i,
+    });
+    selectedWeek.push(
+      formateDate(
+        day,
+        dateFormationScheme
+      )
+    );
   }
 
-  const extractShortDate = (fullDate: string) => fullDate.split(",")[1].trim();
+  const extractShortDate = (
+    fullDate: string
+  ) => fullDate.split(",")[1].trim();
 
-  const selectedPeriod = `${extractShortDate(
-    String(selectedWeek.at(0))
-  )} - ${extractShortDate(String(selectedWeek.at(-1)))}`.replace(/\./g, "");
+  const selectedPeriod =
+    selectedWeek.length > 0
+      ? `${extractShortDate(
+          String(selectedWeek[0])
+        )} - ${extractShortDate(
+          String(
+            selectedWeek[
+              selectedWeek.length - 1
+            ]
+          )
+        )}`.replace(/\./g, "")
+      : "";
 
-  const changeWeek = (changeFunc: Function) => {
+  const changeWeek = (
+    changeFunc: Function
+  ) => {
     setFirstDayOfWeek(
-      changeFunc(firstDayOfWeek, { days: device === "mobile" ? 1 : 7 })
+      changeFunc(firstDayOfWeek, {
+        days:
+          device === "mobile" ? 1 : 7,
+      })
     );
   };
 
@@ -155,35 +202,96 @@ export default function Schedule() {
       {/* rename this ai bullshit */}
       <section
         aria-label="Календарь"
-        className={`calendar`}
+        className={styles.calendar}
         data-theme={theme}
         data-device={device}
       >
-        <div className="calendar-header">
-          <h3 className="calendar-header__heading">{selectedPeriod}</h3>
-          <div className="nav-btn__container">
+        <div
+          className={
+            styles["calendar-header"]
+          }
+        >
+          <h3
+            className={
+              styles[
+                "calendar-header__heading"
+              ]
+            }
+          >
+            {selectedPeriod}
+          </h3>
+          <div
+            className={
+              styles[
+                "nav-btn__container"
+              ]
+            }
+          >
             <button
-              className="nav-btn reversed"
-              onClick={() => changeWeek(sub)}
+              className={`${styles["nav-btn"]} ${styles.reversed}`}
+              onClick={() =>
+                changeWeek(sub)
+              }
             >
               {arrowButton}
             </button>
-            <button className="nav-btn" onClick={() => changeWeek(add)}>
+            <button
+              className={
+                styles["nav-btn"]
+              }
+              onClick={() =>
+                changeWeek(add)
+              }
+            >
               {arrowButton}
             </button>
           </div>
-          <div className="header-actions">
-            <button className="chip">
+          <div
+            className={
+              styles["header-actions"]
+            }
+          >
+            <button
+              className={styles.chip}
+            >
               {calendarIcon}
-              <span className="chip-name">Неделя</span>
+              <span
+                className={
+                  styles["chip-name"]
+                }
+              >
+                Неделя
+              </span>
               {dropdownArrow}
             </button>
-            <button className="primary">Добавить</button>
+            <button
+              className={styles.primary}
+            >
+              Добавить
+            </button>
           </div>
         </div>
-        <div className="calendar-content">
-          <div className="slots-wrapper"></div>
-          <TableGrid days={selectedWeek}></TableGrid>
+        <div
+          className={
+            styles["calendar-content"]
+          }
+        >
+          <div
+            className={
+              styles["slots-wrapper"]
+            }
+          >
+            <Slot
+              slot={{
+                title: "test",
+                description: "lol",
+                time: "14:00-16:00",
+              }}
+            ></Slot>
+          </div>
+          <TableGrid
+            days={selectedWeek}
+          ></TableGrid>
         </div>
       </section>
     </>

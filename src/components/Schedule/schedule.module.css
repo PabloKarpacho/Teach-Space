@@ -1,5 +1,6 @@
 /* Calendar */
 .calendar {
+  --border-line-thikness: 1px;
   margin: 30px;
   border-radius: var(--radius-xl);
   overflow: hidden;
@@ -196,10 +197,13 @@
   width: 100%;
   padding: calc(
       var(--days-row-height) + var(--schedule-thead-mg-bottom) +
-        var(--schedule-grid-pd-top)
+        var(--schedule-grid-pd-top) + var(--border-line-thikness)
     )
     var(--schedule-grid-pd-right) var(--schedule-grid-pd-bottom)
-    calc(var(--schedule-grid-pd-left) + var(--time-colomn-width));
+    calc(
+      var(--schedule-grid-pd-left) + var(--time-colomn-width) + 2 *
+        var(--border-line-thikness)
+    );
 
   display: grid;
   /* grid-template-columns: repeat(var(--schedule-grid-colomns), 1fr); */

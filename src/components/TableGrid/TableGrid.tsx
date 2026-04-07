@@ -1,11 +1,13 @@
-import "./tableGrid.css";
+import styles from "./tableGrid.module.css";
 
 import Day from "./Day";
 interface TableDay {
   days: string[];
 }
 
-export default function TableGrid({ days }: TableDay) {
+export default function TableGrid({
+  days,
+}: TableDay) {
   const dayTime = [
     "9:00",
     "10:00",
@@ -24,39 +26,81 @@ export default function TableGrid({ days }: TableDay) {
   ];
 
   const dayList = days.map((day) => {
-    const [monthDay, date] = day.split(",");
+    const [monthDay, date] =
+      day.split(",");
     return {
       dayOfWeek: monthDay,
-      dayOfMonth: Number(date.trim().split(" ")[0]),
+      dayOfMonth: Number(
+        date.trim().split(" ")[0]
+      ),
     };
   });
 
-  const emptyCellRow: React.ReactElement[] = Array.from(
-    { length: days.length },
-    (_, i) => <td key={i} className="calendar-template__cell"></td>
+  const emptyCellRow: React.ReactElement[] =
+    Array.from(
+      { length: days.length },
+      (_, i) => (
+        <td
+          key={i}
+          className={
+            styles[
+              "calendar-template__cell"
+            ]
+          }
+        ></td>
+      )
+    );
+
+  const tableGridTemplate = dayTime.map(
+    (time) => (
+      <tr
+        key={time}
+        className={
+          styles[
+            "calendar-template__row"
+          ]
+        }
+      >
+        <th
+          className={
+            styles[
+              "calendar-template__time"
+            ]
+          }
+        >
+          {time}
+        </th>
+        {emptyCellRow}
+      </tr>
+    )
   );
 
-  const tableGridTemplate = dayTime.map((time) => (
-    <tr key={time} className="calendar-template__row">
-      <th className="calendar-template__time">{time}</th>
-      {emptyCellRow}
-    </tr>
-  ));
-
   return (
-    <table className="calendar-grid">
+    <table
+      className={
+        styles["calendar-grid"]
+      }
+    >
       <thead>
-        <tr className="days">
+        <tr className={styles.days}>
           {dayList.map((day) => (
             <Day
               key={day.dayOfMonth}
               dayOfWeek={day.dayOfWeek}
-              dayOfMonth={day.dayOfMonth}
+              dayOfMonth={
+                day.dayOfMonth
+              }
             ></Day>
           ))}
         </tr>
       </thead>
-      <tbody className="calendar-template">{tableGridTemplate}</tbody>
+      <tbody
+        className={
+          styles["calendar-template"]
+        }
+      >
+        {tableGridTemplate}
+      </tbody>
     </table>
   );
 }

@@ -19,8 +19,10 @@
   overflow-y: auto;
   overflow-x: hidden;
 
-  padding: var(--schedule-grid-pd-top) var(--schedule-grid-pd-right)
-    var(--schedule-grid-pd-bottom) var(--schedule-grid-pd-left);
+  padding: var(--schedule-grid-pd-top)
+    var(--schedule-grid-pd-right)
+    var(--schedule-grid-pd-bottom)
+    var(--schedule-grid-pd-left);
 }
 .calendar-grid thead {
   display: flex;
@@ -53,23 +55,33 @@
   justify-content: space-between;
   gap: 5px;
   margin-left: var(--time-colomn-width);
-  margin-bottom: var(--schedule-thead-mg-bottom);
+  margin-bottom: var(
+    --schedule-thead-mg-bottom
+  );
 }
 
 .day {
   height: var(--days-row-height);
   width: 100%;
-  border-radius: calc(var(--days-row-height) / 2);
+  border-radius: calc(
+    var(--days-row-height) / 2
+  );
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   text-transform: capitalize;
-  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .calendar[data-theme="light"] .day {
-  background: linear-gradient(#ffffff, #ffffff) padding-box,
+  background: linear-gradient(
+        #ffffff,
+        #ffffff
+      )
+      padding-box,
     repeating-linear-gradient(
         to bottom,
         var(--line),
@@ -83,7 +95,11 @@
 }
 
 .calendar[data-theme="dark"] .day {
-  background: linear-gradient(var(--panel), var(--panel)) padding-box,
+  background: linear-gradient(
+        var(--panel),
+        var(--panel)
+      )
+      padding-box,
     repeating-linear-gradient(
         to bottom,
         var(--line),
@@ -133,13 +149,19 @@
 
   & .calendar-template__row {
     &:first-child {
-      & .calendar-template__cell:nth-child(2) {
+      &
+        .calendar-template__cell:nth-child(
+          2
+        ) {
         border-radius: 10px 10px 0 0;
       }
     }
 
     &:last-child {
-      & .calendar-template__cell:nth-child(2) {
+      &
+        .calendar-template__cell:nth-child(
+          2
+        ) {
         border-radius: 0 0 10px 10px;
       }
     }
@@ -151,13 +173,19 @@
     border-top: 1px solid var(--line);
   }
 
-  & .calendar-template__cell:nth-child(2) {
+  &
+    .calendar-template__cell:nth-child(
+      2
+    ) {
     border-radius: 10px 0 0 0;
   }
 }
 
 .calendar-template__row:last-child {
-  & .calendar-template__cell:nth-child(2) {
+  &
+    .calendar-template__cell:nth-child(
+      2
+    ) {
     border-radius: 0 0 0 10px;
   }
 }

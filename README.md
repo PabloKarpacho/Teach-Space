@@ -1,16 +1,54 @@
-# React + Vite
+# Teach-Space Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Фронтенд-приложение **Teach-Space** — образовательная платформа, построенная на React + Vite с использованием TypeScript.
 
-Currently, two official plugins are available:
+## Стек технологий
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** — UI-библиотека
+- **Vite** — сборщик и dev-сервер
+- **Redux Toolkit** — управление состоянием
+- **React Router DOM** — маршрутизация
+- **Material UI (MUI)** — компоненты интерфейса
+- **Tailwind CSS** — утилитарные стили
+- **Sass** — CSS-препроцессор
+- **TypeScript** — типизация
+- **ESLint** — линтинг
 
-## React Compiler
+## Установка и запуск
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Установка зависимостей
 
-## Expanding the ESLint configuration
+```bash
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 2. Запуск dev-сервера
+
+```bash
+npm run dev
+```
+
+После запуска откройте браузер по адресу, указанному в терминале (обычно `http://localhost:5173`).
+
+## Доступные команды
+
+| Команда           | Описание                                   |
+| ----------------- | ------------------------------------------ |
+| `npm run dev`     | Запуск dev-сервера с горячей перезагрузкой |
+| `npm run build`   | Сборка проекта для продакшена              |
+| `npm run preview` | Предпросмотр продакшен-сборки              |
+| `npm run lint`    | Проверка кода линтером ESLint              |
+
+## Структура проекта
+
+```
+frontend/
+├── public/          # Статические файлы
+├── src/
+│   ├── components/  # React-компоненты
+│   ├── App.tsx      # Корневой компонент
+│   ├── main.tsx     # Точка входа
+│   └── styles.css   # Глобальные стили
+├── index.html       # HTML-шаблон
+└── package.json     # Зависимости и скрипты
+```
