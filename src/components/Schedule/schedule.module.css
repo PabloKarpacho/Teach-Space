@@ -1,0 +1,212 @@
+/* Calendar */
+.calendar {
+  --border-line-thikness: 1px;
+  margin: 30px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+/* Light theme */
+.calendar[data-theme="light"] {
+  --bg1: #dff4ef;
+  --bg2: #e9d9ff;
+  --panel: #ffffff;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --line: #e6e8ef;
+  --chip: #f3f5f9;
+  --chip-border: #e5e7eb;
+  --blue: #2563eb;
+  --blue-50: #ecf2ff;
+  --purple: #7c3aed;
+  --green: #10b981;
+  --orange: #f59e0b;
+  --shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+}
+
+/* Dark theme */
+.calendar[data-theme="dark"] {
+  --bg1: #0f172a;
+  --bg2: #1e1b2e;
+  --panel: #1e293b;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --line: #334155;
+  --chip: #1e293b;
+  --chip-border: #475569;
+  --blue: #3b82f6;
+  --blue-50: #1e3a5f;
+  --purple: #8b5cf6;
+  --green: #22c55e;
+  --orange: #f59e0b;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.calendar[data-theme="light"] {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.calendar[data-theme="dark"] {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.3s ease;
+}
+
+.calendar-header__heading {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  transition: color 0.3s ease;
+}
+
+.calendar[data-theme="light"] .calendar-header__heading {
+  color: #656573;
+}
+
+.calendar[data-theme="dark"] .calendar-header__heading {
+  color: var(--text);
+}
+
+.nav-btn__container {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  height: 38px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+
+  &.reversed {
+    transform: scale(-1);
+  }
+}
+
+.calendar[data-theme="light"] .nav-btn {
+  border-color: var(--line);
+}
+
+.calendar[data-theme="light"] .nav-btn:hover {
+  background: #f3f4f6;
+}
+
+.calendar[data-theme="dark"] .nav-btn {
+  border-color: var(--line);
+  color: var(--muted);
+}
+
+.calendar[data-theme="dark"] .nav-btn:hover {
+  background: #334155;
+  color: var(--text);
+}
+
+.calendar[data-theme="dark"] .nav-btn svg path {
+  stroke: currentColor;
+}
+
+.header-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--chip-border);
+  background-color: transparent;
+  cursor: pointer;
+}
+.calendar[data-theme="light"] .chip-name {
+  color: #92949c;
+}
+
+.calendar[data-theme="light"] .chip:hover {
+  background: var(--chip);
+  border-color: var(--chip-border);
+}
+
+.calendar[data-theme="dark"] .chip {
+  border-color: var(--chip-border);
+  color: var(--muted);
+}
+
+.calendar[data-theme="dark"] .chip:hover {
+  background: #334155;
+  border-color: var(--line);
+}
+
+.calendar[data-theme="dark"] .chip-name {
+  color: var(--muted);
+}
+
+.calendar[data-theme="dark"] .chip svg {
+  color: var(--muted);
+}
+.primary {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+  transition: all 0.2s ease;
+}
+
+.calendar[data-theme="dark"] .primary {
+  background: var(--blue);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+}
+
+.calendar[data-theme="dark"] .primary:hover {
+  background: #2563eb;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+.calendar-content {
+  position: relative;
+}
+
+.slots-wrapper {
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  padding: calc(
+      var(--days-row-height) + var(--schedule-thead-mg-bottom) +
+        var(--schedule-grid-pd-top) + var(--border-line-thikness)
+    )
+    var(--schedule-grid-pd-right) var(--schedule-grid-pd-bottom)
+    calc(
+      var(--schedule-grid-pd-left) + var(--time-colomn-width) + 2 *
+        var(--border-line-thikness)
+    );
+
+  display: grid;
+  /* grid-template-columns: repeat(var(--schedule-grid-colomns), 1fr); */
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: auto;
+}
