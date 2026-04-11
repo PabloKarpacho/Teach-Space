@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-ssr
+*.local
+.git
+.vscode
+.idea
+.qwen
+eslint.config.js
+.gitignore
+LICENSE
+README.md
